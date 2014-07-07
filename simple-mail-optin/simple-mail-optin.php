@@ -3,7 +3,7 @@
 Plugin Name: Simple Mail Optin
 Plugin URI: https://cantuaria.net.br
 Description: Um simples plugin que grava emails no backend atraves de um formulário no front-end.
-Version: 1.0
+Version: 1.1
 Author: Bruno Cantuária
 Author URI: https://cantuaria.net.br
 License: GNU General Public License
@@ -36,13 +36,13 @@ function smo_register_mail() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "smo_emails";
 	
-	//Verificação basica dos dados
-	if (!$name) smo_die(__("Insira um nome!","smo"));
-	if (!$email) smo_die(__("Insira um e-mail!","smo"));
-	
 	//Escape nos dados recebidos que vão pro DB
 	$name = mysql_real_escape_string($_POST['name']);
 	$email = mysql_real_escape_string($_POST['email']);
+	
+	//Verificação basica dos dados
+	if (!$name) smo_die(__("Insira um nome!","smo"));
+	if (!$email) smo_die(__("Insira um e-mail!","smo"));
 	
 	//Verificando se o email é realmente um email
 	if(!filter_var($email, FILTER_VALIDATE_EMAIL)) smo_die(__("Isso não é um e-mail!","smo"));
@@ -88,7 +88,7 @@ function smo_insert_script() {
 				$("#email_optin").html("<div class='smo_msg_holder' style='z-index: 9999; padding: 20%; width: 100%; left: 0; position: fixed; top: 0; height: 100%; color: #CCC; font-size: 40px; text-shadow: 2px 2px 2px black; text-align: center; background: #333; background:rgba(0,0,0,0.8); display: none;'>Aguarde...</div>");
 				
 				//invocando ajax para cadastrar email
-				$("#email_optin .smo_msg_holder").fadeTo(1000,1, function () {
+				$("#email_optin .smo_msg_holder").fadeTo(500,1, function () {
 					$.ajax({
 						type: "post",
 						url: "<?php echo admin_url('admin-ajax.php'); ?>",
@@ -101,14 +101,14 @@ function smo_insert_script() {
 						complete: function() {},
 						success: function(html){
 							//Email cadastrado com sucesso
-							$("#email_optin .smo_msg_holder").fadeTo(1000,0, function () {
+							$("#email_optin .smo_msg_holder").fadeTo(500,0, function () {
 								$("#email_optin").html(holder);
 								alert(html);
 							});
 						},
 						error: function(request,error){
 							//Erro, restaurando dados
-							$("#email_optin .smo_msg_holder").fadeTo(1000,0, function () {
+							$("#email_optin .smo_msg_holder").fadeTo(500,0, function () {
 								$("#email_optin").html(holder);
 								alert(request["responseText"]);
 								$("#name").val(holderName);
