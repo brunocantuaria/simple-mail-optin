@@ -3,7 +3,7 @@
 Plugin Name: Simple Mail Optin
 Plugin URI: https://cantuaria.net.br
 Description: Um simples plugin que grava emails no backend atraves de um formulário no front-end.
-Version: 1.2
+Version: 1.3
 Author: Bruno Cantuária
 Author URI: https://cantuaria.net.br
 License: GNU General Public License
