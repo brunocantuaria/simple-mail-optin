@@ -3,7 +3,7 @@
 Plugin Name: Simple Mail Optin
 Plugin URI: https://cantuaria.net.br
 Description: Um simples plugin que grava emails no backend atraves de um formulário no front-end.
-Version: 1.3
+Version: 1.4
 Author: Bruno Cantuária
 Author URI: https://cantuaria.net.br
 License: GNU General Public License
@@ -37,8 +37,8 @@ function smo_register_mail() {
 	$table_name = $wpdb->prefix . "smo_emails";
 	
 	//Escape nos dados recebidos que vão pro DB
-	$name = mysql_real_escape_string($_POST['name']);
-	$email = mysql_real_escape_string($_POST['email']);
+	$name = $_POST['name'];
+	$email = $_POST['email'];
 	
 	//Verificação basica dos dados
 	if (!$name) smo_die(__("Insira um nome!","smo"));
